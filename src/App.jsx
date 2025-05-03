@@ -51,6 +51,14 @@ function App() {
     });
   }
 
+  function deleteNote(id) {
+    setNotes((prevNotes) => {
+      return prevNotes.filter((note, index) => {
+        return index !== id;
+      });
+    });
+  }
+
   return (
     <>
       <Header />
@@ -61,7 +69,13 @@ function App() {
         onSubmit={addNewNote}
       />
       {notes.map((note, index) => (
-        <Note key={index} title={note.title} content={note.content} />
+        <Note
+          key={index}
+          id={index}
+          title={note.title}
+          content={note.content}
+          delete={deleteNote}
+        />
       ))}
       <Footer />
     </>
