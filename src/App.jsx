@@ -1,63 +1,12 @@
-import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/footer";
 import Note from "./components/note";
 import CreateArea from "./components/CreateArea";
+import { useKeeperFunctions } from "./components/functions";
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      title: "First Note",
-      content: "How does it work?",
-    },
-    {
-      title: "Second Note",
-      content: "It worked?",
-    },
-  ]);
-  const [newNote, setNewNote] = useState({
-    title: "",
-    content: "",
-  });
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-    if (name === "title") {
-      setNewNote((prevValue) => {
-        return {
-          ...prevValue,
-          title: value,
-        };
-      });
-    } else if (name === "content") {
-      setNewNote((prevValue) => {
-        return {
-          ...prevValue,
-          content: value,
-        };
-      });
-    }
-    console.log(newNote);
-  }
-
-  function addNewNote() {
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
-    setNewNote({
-      title: "",
-      content: "",
-    });
-  }
-
-  function deleteNote(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((note, index) => {
-        return index !== id;
-      });
-    });
-  }
+  const { handleChange, newNote, addNewNote, notes, deleteNote } =
+    useKeeperFunctions();
 
   return (
     <>
